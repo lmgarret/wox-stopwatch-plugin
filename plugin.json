@@ -3,7 +3,7 @@
   "Name": "Stopwatch",
   "Description": "Stopwatch with laps, live in the launcher",
   "Author": "lmgarret",
-  "Version": "0.1.0",
+  "Version": "0.1.1",
   "MinWoxVersion": "2.0.4",
   "Runtime": "python",
   "Website": "https://github.com/lmgarret/wox-stopwatch-plugin",
