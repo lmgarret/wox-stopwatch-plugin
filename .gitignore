@@ -1,8 +1,22 @@
+# Python
 __pycache__/
 *.pyc
 .venv/
+.venv_*/
+
+# Build output
 dist/
 *.wox
+
+# Tooling caches
 .ruff_cache/
 .mypy_cache/
+
+# Editor & OS
+.idea/
+.vscode/
 .DS_Store
+Thumbs.db
+
+# Agent tooling
+.claude/

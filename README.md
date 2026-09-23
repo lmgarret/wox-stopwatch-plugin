@@ -4,6 +4,12 @@
 
 <h1 align="center">Wox Stopwatch</h1>
 
+<p align="center">
+  <a href="https://github.com/lmgarret/wox-stopwatch-plugin/actions/workflows/ci.yml"><img src="https://github.com/lmgarret/wox-stopwatch-plugin/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/lmgarret/wox-stopwatch-plugin/releases/latest"><img src="https://img.shields.io/github/v/release/lmgarret/wox-stopwatch-plugin" alt="Latest release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-blue" alt="License: GPL-3.0"></a>
+</p>
+
 A stopwatch plugin for [Wox](https://github.com/Wox-launcher/Wox) v2 that runs in the launcher and records laps.
 
 ## Usage
@@ -31,15 +37,24 @@ The stopwatch uses wall-clock time and is saved in the plugin's cache folder, so
 
 ## Install
 
+- **Store**: search for *Stopwatch* in Wox's plugin store.
+- **Release**: download `wox.plugin.stopwatch.wox` from the
+  [latest release](https://github.com/lmgarret/wox-stopwatch-plugin/releases/latest) and open it.
 - **Development**: in Wox settings, add this repository folder as a local plugin directory.
-- **Package**: run `make package` and install the resulting `wox.plugin.stopwatch.wox`.
 
 Requires Wox ≥ 2.0.4 with Python ≥ 3.10.
 
 ## Development
 
 ```sh
-uv venv && uv pip install wox-plugin
-.venv/bin/python -m unittest discover -s tests
+uv sync --group dev
+make test
 make lint
+make package
 ```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the git hooks, commit conventions and release process.
+
+## License
+
+[GPL-3.0](LICENSE)
