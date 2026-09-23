@@ -5,7 +5,7 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from wox_stopwatch.state import StateStore, Stopwatch, format_duration  # noqa: E402
+from wox_stopwatch.state import StateStore, Stopwatch, format_duration
 
 
 class StopwatchTest(unittest.TestCase):

@@ -10,8 +10,8 @@ import json
 import os
 import tempfile
 import time
+from collections.abc import Callable
 from dataclasses import asdict, dataclass, field
-from typing import Callable, List, Optional
 
 
 @dataclass
@@ -22,34 +22,34 @@ class Stopwatch:
     # Elapsed seconds accumulated before the current run segment.
     accumulated: float = 0.0
     # Total elapsed seconds at the moment each lap was recorded.
-    laps: List[float] = field(default_factory=list)
+    laps: list[float] = field(default_factory=list)
 
-    def elapsed(self, now: Optional[float] = None) -> float:
+    def elapsed(self, now: float | None = None) -> float:
         if not self.running:
             return self.accumulated
         now = time.time() if now is None else now
         return self.accumulated + max(0.0, now - self.started_at)
 
-    def start(self, now: Optional[float] = None) -> None:
+    def start(self, now: float | None = None) -> None:
         if self.running:
             return
         self.started_at = time.time() if now is None else now
         self.running = True
 
-    def pause(self, now: Optional[float] = None) -> None:
+    def pause(self, now: float | None = None) -> None:
         if not self.running:
             return
         self.accumulated = self.elapsed(now)
         self.running = False
         self.started_at = 0.0
 
-    def toggle(self, now: Optional[float] = None) -> None:
+    def toggle(self, now: float | None = None) -> None:
         if self.running:
             self.pause(now)
         else:
             self.start(now)
 
-    def lap(self, now: Optional[float] = None) -> None:
+    def lap(self, now: float | None = None) -> None:
         if self.running:
             self.laps.append(self.elapsed(now))
 
@@ -59,7 +59,7 @@ class Stopwatch:
         self.accumulated = 0.0
         self.laps = []
 
-    def lap_splits(self) -> List[float]:
+    def lap_splits(self) -> list[float]:
         """Duration of each individual lap (laps store cumulative totals)."""
         splits = []
         previous = 0.0
@@ -75,7 +75,7 @@ class Stopwatch:
         return "paused" if self.accumulated > 0 else "idle"
 
     @classmethod
-    def from_dict(cls, data: dict) -> "Stopwatch":
+    def from_dict(cls, data: dict) -> Stopwatch:
         return cls(
             running=bool(data.get("running", False)),
             started_at=float(data.get("started_at", 0.0)),
@@ -115,7 +115,7 @@ def _write_json_atomic(path: str, data: dict) -> None:
 
 def _read_json(path: str) -> dict:
     try:
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             data = json.load(f)
         return data if isinstance(data, dict) else {}
     except (OSError, ValueError):

@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import asyncio
 import os
-from typing import Awaitable, Callable, List, Optional
+from collections.abc import Awaitable, Callable
 
 from wox_plugin import (
     ActionContext,
@@ -55,7 +55,7 @@ STATUS_TEXT = {"running": "Running", "paused": "Paused", "idle": "Ready"}
 class StopwatchPlugin(Plugin):
     api: PublicAPI
     store: StateStore
-    tick_task: Optional[asyncio.Task] = None
+    tick_task: asyncio.Task | None = None
 
     async def init(self, ctx: Context, init_params: PluginInitParams) -> None:
         self.api = init_params.api
@@ -75,12 +75,12 @@ class StopwatchPlugin(Plugin):
         self._start_ticking(ctx, stopwatch)
         return QueryResponse(results=results)
 
-    def _build_results(self, stopwatch: Stopwatch) -> List[Result]:
+    def _build_results(self, stopwatch: Stopwatch) -> list[Result]:
         running = stopwatch.running
         elapsed = stopwatch.elapsed()
         toggle_title = "Pause" if running else ("Resume" if elapsed > 0 else "Start")
         toggle_icon = ICON_PAUSE if running else ICON_START
-        results: List[Result] = [
+        results: list[Result] = [
             Result(
                 id=STATUS_RESULT_ID,
                 title=format_duration(elapsed, 1),
@@ -116,7 +116,7 @@ class StopwatchPlugin(Plugin):
         return text
 
     @staticmethod
-    def _status_tails(stopwatch: Stopwatch) -> List[ResultTail]:
+    def _status_tails(stopwatch: Stopwatch) -> list[ResultTail]:
         if not stopwatch.laps:
             return []
         current_lap = stopwatch.elapsed() - stopwatch.laps[-1]

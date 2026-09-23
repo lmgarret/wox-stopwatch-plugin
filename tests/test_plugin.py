@@ -13,7 +13,7 @@ try:
 except ImportError:  # pragma: no cover
     raise unittest.SkipTest("wox-plugin not installed")
 
-from wox_stopwatch.main import STATUS_RESULT_ID, StopwatchPlugin  # noqa: E402
+from wox_stopwatch.main import STATUS_RESULT_ID, StopwatchPlugin
 
 
 class FakeAPI:
