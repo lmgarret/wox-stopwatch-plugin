@@ -1,20 +1,20 @@
 {
-    "Id": "1a1827d1-63ef-463b-8741-1cb2bf0ad10e",
-    "Name": "Stopwatch",
-    "Description": "Stopwatch with laps, live in the launcher",
-    "Author": "lmgarret",
-    "Version": "0.1.0",
-    "MinWoxVersion": "2.0.4",
-    "Runtime": "python",
-    "Website": "https://github.com/lmgarret/wox-stopwatch-plugin",
-    "Entry": "wox_stopwatch/main.py",
-    "Icon": "relative:images/stopwatch.svg",
-    "TriggerKeywords": [
-        "sw"
-    ],
-    "SupportedOS": [
-        "windows",
-        "linux",
-        "darwin"
-    ]
+  "Id": "1a1827d1-63ef-463b-8741-1cb2bf0ad10e",
+  "Name": "Stopwatch",
+  "Description": "Stopwatch with laps, live in the launcher",
+  "Author": "lmgarret",
+  "Version": "0.1.0",
+  "MinWoxVersion": "2.0.4",
+  "Runtime": "python",
+  "Website": "https://github.com/lmgarret/wox-stopwatch-plugin",
+  "Entry": "wox_stopwatch/main.py",
+  "Icon": "relative:images/stopwatch.svg",
+  "TriggerKeywords": [
+    "sw"
+  ],
+  "SupportedOS": [
+    "windows",
+    "linux",
+    "darwin"
+  ]
 }
