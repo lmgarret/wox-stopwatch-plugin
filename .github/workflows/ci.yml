@@ -50,8 +50,11 @@ jobs:
           enable-cache: true
           python-version: ${{ matrix.python-version }}
 
+      # --frozen, not --locked: release-please bumps the project version in
+      # pyproject.toml without regenerating uv.lock, and --locked would reject
+      # that drift on every release PR. The lockfile still pins the dev deps.
       - name: Install dependencies
-        run: uv sync --locked --group dev
+        run: uv sync --frozen --group dev
 
       - name: Test
         run: uv run python -m unittest discover -s tests -v
