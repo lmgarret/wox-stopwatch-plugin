@@ -1,9 +1,7 @@
-"""Stopwatch state shared between the Wox plugin and the stopwatch window.
+"""Stopwatch state, persisted as JSON in the plugin cache folder.
 
-Both processes read and write the same JSON file, so this module must only
-depend on the standard library (the window runs outside the Wox host).
-Times are wall-clock (time.time()) so a running stopwatch survives Wox
-restarts and stays consistent across processes.
+Times are wall-clock (time.time()) so a running stopwatch keeps counting
+across Wox restarts.
 """
 
 from __future__ import annotations
@@ -125,21 +123,11 @@ def _read_json(path: str) -> dict:
 
 
 class StateStore:
-    """File-backed stopwatch state plus the plugin <-> window control channel.
-
-    Files inside `folder`:
-      - stopwatch.json: the Stopwatch itself
-      - window.json: heartbeat written by the window so the plugin knows it is open
-      - window_cmd.json: requests from the plugin to the window (e.g. bring to front)
-    """
-
-    HEARTBEAT_TIMEOUT = 3.0
+    """Loads and saves the Stopwatch in `folder`/stopwatch.json."""
 
     def __init__(self, folder: str) -> None:
         self.folder = folder
         self.state_path = os.path.join(folder, "stopwatch.json")
-        self.window_path = os.path.join(folder, "window.json")
-        self.command_path = os.path.join(folder, "window_cmd.json")
 
     def load(self) -> Stopwatch:
         return Stopwatch.from_dict(_read_json(self.state_path))
@@ -152,30 +140,3 @@ class StateStore:
         change(stopwatch)
         self.save(stopwatch)
         return stopwatch
-
-    def state_mtime(self) -> float:
-        try:
-            return os.path.getmtime(self.state_path)
-        except OSError:
-            return 0.0
-
-    # Window heartbeat / commands
-
-    def write_heartbeat(self, pid: int) -> None:
-        _write_json_atomic(self.window_path, {"pid": pid, "heartbeat": time.time()})
-
-    def clear_heartbeat(self) -> None:
-        try:
-            os.remove(self.window_path)
-        except OSError:
-            pass
-
-    def is_window_open(self) -> bool:
-        heartbeat = float(_read_json(self.window_path).get("heartbeat", 0.0))
-        return time.time() - heartbeat < self.HEARTBEAT_TIMEOUT
-
-    def send_window_command(self, command: str) -> None:
-        _write_json_atomic(self.command_path, {"command": command, "at": time.time()})
-
-    def read_window_command(self) -> dict:
-        return _read_json(self.command_path)

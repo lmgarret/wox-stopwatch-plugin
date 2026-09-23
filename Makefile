@@ -10,7 +10,7 @@ lint:
 	uvx ruff format --check wox_stopwatch tests
 
 package: clean
-	zip -r $(PACKAGE) plugin.json wox_stopwatch -x '*__pycache__*'
+	zip -r $(PACKAGE) plugin.json images wox_stopwatch -x '*__pycache__*'
 
 clean:
 	rm -f $(PACKAGE)

@@ -33,9 +33,6 @@ class FakeAPI:
         self.updates.append(result)
         return self.visible
 
-    async def get_updatable_result(self, ctx, result_id):
-        return object() if self.visible else None
-
     async def notify(self, ctx, message):
         pass
 
@@ -74,7 +71,6 @@ class PluginTest(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(titles[0], "00:00.0")
         self.assertIn("Start", titles)
         self.assertNotIn("Reset", titles)
-        self.assertIn("Open stopwatch window", titles)
 
     async def test_start_then_tick_updates_status_row(self):
         response = await self.plugin.query(self.ctx, make_query())
@@ -96,19 +92,10 @@ class PluginTest(unittest.IsolatedAsyncioTestCase):
         await asyncio.sleep(0.25)
         self.assertTrue(self.plugin.tick_task.done())
 
-    async def test_external_change_triggers_refresh(self):
-        await self.plugin.query(self.ctx, make_query())
-        await asyncio.sleep(0.15)
-        # Simulate the window starting the stopwatch; ensure mtime differs.
-        self.plugin.store.update(lambda sw: sw.start())
-        os.utime(self.plugin.store.state_path, (1, 1))
-        await asyncio.sleep(0.25)
-        self.assertGreaterEqual(self.api.refreshes, 1)
-
     async def test_search_filters_but_keeps_status(self):
-        response = await self.plugin.query(self.ctx, make_query("win"))
+        response = await self.plugin.query(self.ctx, make_query("sta"))
         titles = [r.title for r in response.results]
-        self.assertEqual(titles, ["00:00.0", "Open stopwatch window"])
+        self.assertEqual(titles, ["00:00.0", "Start"])
 
 
 if __name__ == "__main__":

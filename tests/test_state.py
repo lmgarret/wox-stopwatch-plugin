@@ -79,17 +79,6 @@ class StateStoreTest(unittest.TestCase):
             f.write("{not json")
         self.assertEqual(self.store.load(), Stopwatch())
 
-    def test_window_heartbeat(self):
-        self.assertFalse(self.store.is_window_open())
-        self.store.write_heartbeat(123)
-        self.assertTrue(self.store.is_window_open())
-        self.store.clear_heartbeat()
-        self.assertFalse(self.store.is_window_open())
-
-    def test_window_command(self):
-        self.store.send_window_command("raise")
-        self.assertEqual(self.store.read_window_command()["command"], "raise")
-
 
 if __name__ == "__main__":
     unittest.main()
