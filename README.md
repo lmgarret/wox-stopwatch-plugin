@@ -1,4 +1,8 @@
-# Wox Stopwatch
+<p align="center">
+  <img src="images/stopwatch.svg" width="96" alt="Stopwatch icon">
+</p>
+
+<h1 align="center">Wox Stopwatch</h1>
 
 A stopwatch plugin for [Wox](https://github.com/Wox-launcher/Wox) v2 that runs in the launcher and records laps.
 
@@ -20,6 +24,10 @@ The stopwatch uses wall-clock time and is saved in the plugin's cache folder, so
 ## Icons
 
 The icons in `images/` follow the style of Wox's built-in plugin icons: flat 24×24 SVGs, one saturated color, white glyphs and a light tint for accents. `stopwatch.svg` is the base icon. Each variant (`-start`, `-pause`, `-lap`, `-reset`, `-copy`) adds a colored badge at the bottom right, and a mask cuts a gap around the badge so it stands out on any background.
+
+| <img src="images/stopwatch.svg" width="48"> | <img src="images/stopwatch-start.svg" width="48"> | <img src="images/stopwatch-pause.svg" width="48"> | <img src="images/stopwatch-lap.svg" width="48"> | <img src="images/stopwatch-reset.svg" width="48"> | <img src="images/stopwatch-copy.svg" width="48"> |
+| :-: | :-: | :-: | :-: | :-: | :-: |
+| base | start | pause | lap | reset | copy |
 
 ## Install
 
