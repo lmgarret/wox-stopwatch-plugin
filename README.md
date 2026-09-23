@@ -21,13 +21,13 @@ Anything you type after `sw` filters the results, for example `sw lap`.
 
 The stopwatch uses wall-clock time and is saved in the plugin's cache folder, so it keeps running across Wox restarts.
 
-## Icons
+## Screenshots
 
-The icons in `images/` follow the style of Wox's built-in plugin icons: flat 24×24 SVGs, one saturated color, white glyphs and a light tint for accents. `stopwatch.svg` is the base icon. Each variant (`-start`, `-pause`, `-lap`, `-reset`, `-copy`) adds a colored badge at the bottom right, and a mask cuts a gap around the badge so it stands out on any background.
-
-| <img src="images/stopwatch.svg" width="48"> | <img src="images/stopwatch-start.svg" width="48"> | <img src="images/stopwatch-pause.svg" width="48"> | <img src="images/stopwatch-lap.svg" width="48"> | <img src="images/stopwatch-reset.svg" width="48"> | <img src="images/stopwatch-copy.svg" width="48"> |
-| :-: | :-: | :-: | :-: | :-: | :-: |
-| base | start | pause | lap | reset | copy |
+| | |
+| :-- | :-- |
+| Ready to start | <img src="screenshots/idle.png" width="420" alt="Stopwatch ready to start"> |
+| Running, with Lap and Reset | <img src="screenshots/running.png" width="420" alt="Stopwatch running with Lap, Pause and Reset actions"> |
+| Laps in the preview panel | <img src="screenshots/laps.png" width="420" alt="Lap table in the preview panel"> |
 
 ## Install
 

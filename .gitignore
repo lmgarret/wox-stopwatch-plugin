@@ -5,3 +5,4 @@ dist/
 *.wox
 .ruff_cache/
 .mypy_cache/
+.DS_Store
