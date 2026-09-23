@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.venv/
+dist/
+*.wox
+.ruff_cache/
+.mypy_cache/

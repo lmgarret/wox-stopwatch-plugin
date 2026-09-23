@@ -1,0 +1,20 @@
+{
+    "Id": "1a1827d1-63ef-463b-8741-1cb2bf0ad10e",
+    "Name": "Stopwatch",
+    "Description": "Stopwatch with laps, live in the launcher or in a floating always-on-top window",
+    "Author": "lmgarret",
+    "Version": "0.1.0",
+    "MinWoxVersion": "2.0.4",
+    "Runtime": "python",
+    "Website": "https://github.com/lmgarret/wox-stopwatch-plugin",
+    "Entry": "wox_stopwatch/main.py",
+    "Icon": "emoji:⏱️",
+    "TriggerKeywords": [
+        "sw"
+    ],
+    "SupportedOS": [
+        "windows",
+        "linux",
+        "darwin"
+    ]
+}
